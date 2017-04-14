@@ -7,8 +7,9 @@ const _ = require('lodash');
 //Edit me to add configs! I should be run as part of CI.
 const configTemplate = {
   mongoUrl: process.env.MONGO_URL || 'localhost:27017',
+  mongoNamespace: process.env.MONGO_NAMESPACE || 'wob',
   port: process.env.APP_PORT || 8080,
-  secret: process.env.APP_SECRET || 'lol'
+  salt: process.env.APP_SECRET || '1234567890'
 };
 
 let currentConfig = {};

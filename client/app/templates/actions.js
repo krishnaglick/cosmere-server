@@ -10,8 +10,8 @@ function bindActions(setState) {
   _.forEach(actions, (action) => {
     _.forEach(Object.keys(action), (key) => {
       if(typeof action[key] === 'function')
-        boundActions[key] = async function() {
-          setState(await action[key](...arguments));
+        boundActions[key] = async function(...args) {
+          setState(await action[key](...args, boundActions));
         };
     });
   });

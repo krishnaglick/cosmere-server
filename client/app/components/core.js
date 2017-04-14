@@ -5,7 +5,7 @@ import Component from 'inferno-component';
 import NavBar from './nav-bar';
 import { browserHistory } from '../routes';
 
-const { bindActions/*, initializeData*/ } = require('../actions/index');
+const { bindActions } = require('../actions/index');
 
 class Core extends Component {
   constructor(...args) {
@@ -15,6 +15,7 @@ class Core extends Component {
 
   render() {
     const { state, actions } = this;
+    console.log('Core State: ', state);
     const child = this.props.children && Inferno.cloneVNode(this.props.children, { state, actions, browserHistory });
 
     return (

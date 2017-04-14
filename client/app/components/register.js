@@ -1,9 +1,10 @@
 
 import Inferno from 'inferno';
-
+import cookies from 'cookies-js';
+/* globals $ */
 function Register({ actions, browserHistory }) {
 
-  if(Cookies.get('token'))
+  if(cookies.get('token'))
     browserHistory.push('/songs');
 
   const register = () => actions.register($('#username')[0].value, $('#password')[0].value);

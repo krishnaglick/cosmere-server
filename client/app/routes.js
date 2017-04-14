@@ -6,17 +6,17 @@ import { createBrowserHistory } from 'history';
 const browserHistory = createBrowserHistory();
 
 import Core from './components/core';
-import Songs from './components/songs';
+import Search from './components/search';
 import Login from './components/login';
 import Register from './components/register';
 
 const routes = (
   <Router history={ browserHistory }>
     <Route component={ Core }>
-      <IndexRoute component={ Login }/>
+      <IndexRoute component={ Search }/>
       <Route path='/login' component={ Login } />
       <Route path='/register' component={ Register } />
-      <Route path='/songs' component= { Songs } />
+      <Route path='/search/:term' component= { Search } />
     </Route>
   </Router>
 );

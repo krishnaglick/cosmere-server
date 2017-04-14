@@ -11,7 +11,7 @@ module.exports = async function(server) {
   return await bluebird.all(_.map(filteredHelpers, async (helperFile) => {
     const helper = require(helperFile);
     _.forEach(Object.keys(helper), (key) => {
-      server.app.helpers[key] = helper[key].bind(server);
+      server.app.helpers[key] = (...args) => helper[key](...args, server);
     });
   }));
 };

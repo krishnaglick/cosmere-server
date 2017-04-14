@@ -7,9 +7,9 @@ const glob = require('globby');
 const _ = require('lodash');
 
 module.exports = {
-  entry: './client/app/app.js',
+  entry: path.resolve('./client/app/app.js'),
   output: {
-    path: './static/',
+    path: path.resolve('./static/'),
     filename: 'bundle.js'
   },
   module: {
