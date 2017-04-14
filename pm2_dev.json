@@ -1,0 +1,22 @@
+{
+  "apps" : [{
+    "name"        : "cosmere-server",
+    "script"      : "index.js",
+    "args"        : [],
+    "node_args"   : "",
+    "merge_logs"  : true,
+    "cwd"         : "./",
+    "env": {
+        "NODE_ENV": "dev"
+    },
+    "watch": true,
+    "ignore_watch" : [
+        "node_modules",
+        "client",
+        "uploads"
+    ],
+    "watch_options": {
+      "followSymlinks": false
+    }
+  }]
+}

@@ -1,0 +1,30 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 7,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": ["eslint:recommended", "plugin:inferno/recommended"],
+  "parser": "babel-eslint",
+  "rules": {
+    "indent": [
+      "warn",
+      2
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "strict": "off",
+    "no-console": "off",
+    "require-yield": "off",
+    "inferno/prop-types": "off"
+  }
+}

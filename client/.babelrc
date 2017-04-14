@@ -1,0 +1,14 @@
+{
+  "env": {
+    "development": {
+      "presets": [
+        "latest", "stage-0"
+      ]
+    }
+  },
+  "plugins": [
+    "babel-plugin-syntax-jsx",
+    "babel-plugin-inferno",
+    "transform-runtime"
+  ]
+}
