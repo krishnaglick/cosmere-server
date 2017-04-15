@@ -10,6 +10,4 @@ exports.handler = async function(req, rep) {
   return rep(searchResults);
 };
 
-exports.pres = ['isModerator'];
-
 exports.method = ['GET', 'POST'];
