@@ -3,8 +3,7 @@ exports.authenticateUser = function(req) {
   const { token } = req.state;
   const { helpers } = req.server.app;
   try {
-    //TODO: Check resulting data against provided username.
-    helpers.decryptToken(token);
+    helpers.verifyToken(token);
     return true;
   }
   catch(x) {
@@ -12,4 +11,11 @@ exports.authenticateUser = function(req) {
       throw 'Token Expired!';
     throw x;
   }
+};
+
+exports.isModerator = async function(req) {
+  const { token } = req.headers;
+  const { helpers } = req.server.app;
+  const { moderator } = helpers.decryptToken(token);
+  return !!moderator;
 };

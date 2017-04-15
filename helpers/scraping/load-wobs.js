@@ -1,13 +1,14 @@
 
-const tags = require('./tags');
-const { wob } = require('./model');
 const http = require('http');
 const cheerio = require('cheerio');
+const fs = require('fs');
+const path = require('path');
 const _ = require('lodash');
+const bluebird = require('bluebird');
+const { Promise } = bluebird;
 
 async function promiseScrape(tag) {
   return new Promise((res, rej) => {
-    console.log({tag});
     try {
       const request = http.request({
         hostname: 'www.theoryland.com',
@@ -35,7 +36,7 @@ async function promiseScrape(tag) {
 async function parseHtml(html) {
   const $ = cheerio.load(html);
   const wobs = $('.intv-entry-list > ul > li');
-  const powerWoBs = [];
+  const powerWoBs = {};
   wobs.each((i, e) => {
     const date = $(e).find('.int-date').text();
     const conversation = $(e).find('.entry-data > h4, .entry-data > div');
@@ -54,10 +55,10 @@ async function parseHtml(html) {
       element = $(element);
       if([0,1].includes(index)) {
         id += element.text().replace(/( |,|:|\n|\t)/g, '');
+        if(index === 1) {
+          title = element.text().trim();
+        }
         return null;
-      }
-      if(index === 1) {
-        title = element.text();
       }
       if(index === conversation.length - 2)
         return null;
@@ -68,13 +69,13 @@ async function parseHtml(html) {
       return element.text().trim();
     }).toArray());
 
-    powerWoBs.push({
+    powerWoBs[id] = {
       date,
       tags,
       title,
       conversation: filteredConversation,
       id
-    });
+    };
   });
 
   return powerWoBs;
@@ -88,34 +89,54 @@ async function sleep(time) {
 
 const filters = ['wot', 'robert', 'jordan', 'wheel of time'];
 
-(async () => {
-  try {
-    const [,,usedSaved] = process.argv;
-    let wobs = [];
-    if(usedSaved) {
-      wobs = require('./data');
-    }
-    else {
-      for(let i = 0; i < tags.length; i++) {
-        wobs.push(await parseHtml(await promiseScrape(tags[i])));
-        sleep(1000);
-      }
-      (require('fs')).writeFileSync(require('path').resolve('./data.json'), JSON.stringify(wobs, null, 2), 'UTF-8');
-    }
-    await Promise.all(_.map(wobs, async (words) => {
-      for(let q = 0; q < words.length; q++) {
-        try {
-          await wob.create(words[q]);
-        }
-        catch(x) {
-          console.error(x);
-        }
-      }
-    }));
-    process.exit(0);
+exports.scrapeWobs = async function(tags) {
+  const WoBs = {};
+  for(let i = 0; i < tags.length; i++) {
+    console.log({ tag: tags[i] });
+    const [ wobs ] = await Promise.all([
+      parseHtml(await promiseScrape(tags[i])),
+      sleep(1000)
+    ]);
+    _.merge(WoBs, wobs);
   }
-  catch(x) {
-    console.error(x);
-    process.exit(1);
+  await (async () => {
+    return new Promise((res, rej) => {
+      const dataPath = path.resolve('./utility/data.json');
+      const data = JSON.stringify(WoBs, null, 2);
+      fs.writeFile(dataPath, data, (err) => {
+        if(err) rej(err);
+        res();
+      });
+    });
+  })();
+
+  return WoBs;
+};
+
+exports.loadWobs = async function({ useSaved }, server) {
+  const { scrapeWobs } = server.app.helpers;
+  let WoBs;
+  if(useSaved) {
+    try {
+      WoBs = require('../../utility/data');
+    }
+    catch(x) {}
   }
-})();
+  if(_.isEmpty(WoBs)) {
+    const tags = require('../../utility/tags');
+    WoBs = await scrapeWobs(tags);
+  }
+  return WoBs;
+};
+
+exports.saveWoBs = async function(WoBs, server) {
+  const { wob } = server.db;
+  const wobKeys = Object.keys(WoBs);
+  await Promise.all(wobKeys, async (key) => {
+    try {
+      return await wob.create(WoBs[key]);
+    }
+    catch(x) {}
+  });
+  server.log('WoBs Saved!');
+};

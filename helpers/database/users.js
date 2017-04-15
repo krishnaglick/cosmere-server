@@ -3,33 +3,33 @@ const boom = require('boom');
 const argon2 = require('argon2');
 const salt = new Buffer(require('../../config').salt);
 
-exports.login = async function({ username, password }) {
-  const { users } = this.db;
-  const { helpers } = this.app;
-  const user = await users.findOne({ username });
-  if(!user) {
+exports.login = async function({ username, password }, server) {
+  const { user } = server.db;
+  const { createToken } = server.app.helpers;
+  const foundUser = await user.findOne({ username });
+  if(!foundUser) {
     return boom.badRequest('Username is incorrect or does not exist!');
   }
-  if(await argon2.verify(user.password, password)) {
+  if(await argon2.verify(foundUser.password, password)) {
     return {
-      token: await helpers.createToken(user.username)
+      token: await createToken(foundUser)
     };
   }
   return boom.badRequest('Incorrect password provided');
 };
 
 exports.register = async function({ username, password }, server) {
-  const { users } = this.db;
-  const { helpers } = this.app;
+  const { user } = server.db;
+  const { createToken } = server.app.helpers;
   try {
     password = await argon2.hash(password, salt);
-    await users.create({ username, password });
+    const createdUser = await user.create({ username, password });
     return {
-      token: await helpers.createToken(username)
+      token: await createToken(createdUser)
     };
   }
   catch(x) {
-    server.error(x);
+    console.error(x);
     return boom.wrap(new Error('There was an issue registering. Please try again later.'));
   }
 };

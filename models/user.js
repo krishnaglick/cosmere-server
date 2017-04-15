@@ -1,5 +1,6 @@
 
 module.exports = {
   username: { type: String, index: true },
-  password: String
+  password: String,
+  moderator: { type: Boolean, default: false }
 };

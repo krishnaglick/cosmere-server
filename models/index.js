@@ -11,7 +11,8 @@ module.exports = async function(mongoose) {
 
   _.forEach(filteredModels, (modelPath) => {
     const modelName = modelPath.split('.')[0].split(path.sep).slice(-1)[0];
-    appModels[modelName] = mongoose.model(modelName, require(modelPath));
+    const schema = new mongoose.Schema(require(modelPath));
+    appModels[modelName] = mongoose.model(modelName, schema);
   });
 
   return appModels;
