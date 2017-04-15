@@ -9,6 +9,7 @@
     "build": "webpack --config client/webpack.config.js -d --progress --colors",
     "build:watch": "webpack --config client/webpack.config.js -d --watch --progress --colors",
     "config": "node config-generator",
+    "config:force": "node config-generator force",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
