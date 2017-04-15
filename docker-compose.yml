@@ -1,0 +1,8 @@
+version: "2"
+services:
+  cosmere:
+    working_dir: /cosmere-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cosmere-server

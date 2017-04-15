@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "pm2-docker start pm2_dev.json",
+    "prod": "pm2-docker start pm2_prod.json",
+    "build": "webpack --config client/webpack.config.js -d --progress --colors",
     "build:watch": "webpack --config client/webpack.config.js -d --watch --progress --colors",
     "config": "node config-generator",
     "test": "echo \"Error: no test specified\" && exit 1"
