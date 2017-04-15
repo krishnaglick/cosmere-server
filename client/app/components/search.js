@@ -37,16 +37,24 @@ function Search({ state, actions, params: { term }, browserHistory }) {
     );
   }
 
-  const search = _.debounce(({ target: { value } }) => {
+  const search = ({ target: { value } }) => {
     if(value)
       browserHistory.push(`/search/${value}`);
-  }, 500);
+  };
+  const enterSearch = (e) => e.key === 'Enter' && search(e);
 
   return (
     <span>
       <div className='form-group' style={{width: '60%', marginLeft: '20%', marginTop: '20px'}}>
         <div className='form-group row'>
-          <input type='text' className='form-control' placeholder='Search for a WoB!' value={term} onInput={search} />
+          <input
+            type='text'
+            className='form-control'
+            placeholder='Search for a WoB!'
+            value={term}
+            onInput={_.debounce((e) => search(e), 500)}
+            onKeyPress={enterSearch}
+          />
         </div>
       </div>
       {searchContent}
