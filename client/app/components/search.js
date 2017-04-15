@@ -2,7 +2,10 @@
 import Inferno from 'inferno';
 import _ from 'lodash';
 
-function Search({ state, actions }) {
+function Search({ state, actions, params: { term }, browserHistory }) {
+  if(term && !state.searching && !state.searchResults)
+    actions.search(term);
+
   let searchContent = null;
   if(state.searching)
     searchContent = (
@@ -35,12 +38,17 @@ function Search({ state, actions }) {
   }
 
   const search = _.debounce(({ target: { value } }) => {
-    actions.search(value);
+    if(value)
+      browserHistory.push(`/search/${value}`);
   }, 500);
 
   return (
     <span>
-      <input type='text' placeholder='Search for a WoB!' onInput={search} />
+      <div className='form-group' style={{width: '60%', marginLeft: '20%', marginTop: '20px'}}>
+        <div className='form-group row'>
+          <input type='text' className='form-control' placeholder='Search for a WoB!' value={term} onInput={search} />
+        </div>
+      </div>
       {searchContent}
     </span>
   );

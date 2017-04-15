@@ -16,6 +16,7 @@ const routes = (
       <IndexRoute component={ Search }/>
       <Route path='/login' component={ Login } />
       <Route path='/register' component={ Register } />
+      <Route path='/search' component= { Search } />
       <Route path='/search/:term' component= { Search } />
     </Route>
   </Router>

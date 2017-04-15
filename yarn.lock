@@ -412,12 +412,12 @@ babel-plugin-check-es2015-constants@^6.22.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-inferno@^1.9.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-inferno/-/babel-plugin-inferno-1.9.0.tgz#b8f5b4591577f590d78bd18e2e3e8c8c5c1f6e73"
+babel-plugin-inferno@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-inferno/-/babel-plugin-inferno-3.2.0.tgz#62ae1ac223e74e0d54f29fb196e06e358250d82a"
   dependencies:
     babel-plugin-syntax-jsx "^6.18.0"
-    inferno-vnode-flags "1.3.0-rc.1"
+    inferno-vnode-flags "3.0.0"
 
 babel-plugin-syntax-async-functions@^6.8.0:
   version "6.13.0"
@@ -2033,7 +2033,7 @@ heavy@4.x.x:
     hoek "4.x.x"
     joi "10.x.x"
 
-history@^4.5.1:
+history@^4.5.1, history@^4.6.1:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/history/-/history-4.6.1.tgz#911cf8eb65728555a94f2b12780a0c531a14d2fd"
   dependencies:
@@ -2117,33 +2117,49 @@ inert@^4.1.0:
     joi "10.x.x"
     lru-cache "4.0.x"
 
-inferno-component@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/inferno-component/-/inferno-component-1.2.0.tgz#96c46d1156b256e2cf31f6438e0fe56d3566568e"
+inferno-component@3.0.4, inferno-component@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/inferno-component/-/inferno-component-3.0.4.tgz#c326769b2d5dd4301e3933969781c085eb8b7a4a"
   dependencies:
-    inferno "1.2.0"
+    inferno "3.0.4"
+    inferno-shared "^3.0.0"
+    inferno-vnode-flags "^3.0.0"
 
-inferno-create-element@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/inferno-create-element/-/inferno-create-element-1.2.0.tgz#e9bf6ea0f727ef423a32b0e4a88272a148d44729"
+inferno-create-element@3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/inferno-create-element/-/inferno-create-element-3.0.4.tgz#2dd0817795f06848609d6fa1e5f9b746b6713154"
   dependencies:
-    inferno "1.2.0"
+    inferno "3.0.4"
+    inferno-component "3.0.4"
+    inferno-shared "^3.0.0"
+    inferno-vnode-flags "^3.0.0"
 
-inferno-router@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/inferno-router/-/inferno-router-1.2.0.tgz#0701c067bbd66096f43d4a2468d43d5f21091bc9"
+inferno-router@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/inferno-router/-/inferno-router-3.0.4.tgz#27c069a5daeb8c886ce81c86488f64829172f4bb"
   dependencies:
-    inferno "1.2.0"
-    inferno-component "1.2.0"
-    inferno-create-element "1.2.0"
+    history "^4.6.1"
+    inferno "3.0.4"
+    inferno-component "3.0.4"
+    inferno-create-element "3.0.4"
+    inferno-shared "^3.0.0"
+    inferno-vnode-flags "^3.0.0"
+    path-to-regexp-es6 "0.0.2"
 
-inferno-vnode-flags@1.3.0-rc.1:
-  version "1.3.0-rc.1"
-  resolved "https://registry.yarnpkg.com/inferno-vnode-flags/-/inferno-vnode-flags-1.3.0-rc.1.tgz#2f027cdb70db496708eeaaf30b54962b727adf85"
+inferno-shared@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/inferno-shared/-/inferno-shared-3.0.0.tgz#daaeaf1b52803ab0572c7765ccfcfb925cfe8272"
 
-inferno@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/inferno/-/inferno-1.2.0.tgz#0d1309c361b1e1fa773798d05504be31e4ca395e"
+inferno-vnode-flags@3.0.0, inferno-vnode-flags@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/inferno-vnode-flags/-/inferno-vnode-flags-3.0.0.tgz#f396390f3dafae3b76eea04d04eed6cf2004473b"
+
+inferno@3.0.4, inferno@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/inferno/-/inferno-3.0.4.tgz#cac5495e6c145bfda071d5554b123c37c2033994"
+  dependencies:
+    inferno-shared "^3.0.0"
+    inferno-vnode-flags "^3.0.0"
 
 inflight@^1.0.4:
   version "1.0.6"
@@ -2342,6 +2358,10 @@ is-utf8@^0.2.0:
 is@^3.2.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/is/-/is-3.2.1.tgz#d0ac2ad55eb7b0bec926a5266f6c662aaa83dca5"
+
+isarray@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
 
 isarray@1.0.0, isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
@@ -2983,6 +3003,18 @@ path-is-inside@^1.0.1:
 path-parse@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
+
+path-to-regexp-es6@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/path-to-regexp-es6/-/path-to-regexp-es6-0.0.2.tgz#80cf615ce3220a29af9fe54f8862c730d9b56e0b"
+  dependencies:
+    path-to-regexp "*"
+
+path-to-regexp@*:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-1.7.0.tgz#59fde0f435badacba103a84e9d3bc64e96b9937d"
+  dependencies:
+    isarray "0.0.1"
 
 path-type@^1.0.0:
   version "1.1.0"
