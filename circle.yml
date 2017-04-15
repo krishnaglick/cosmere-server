@@ -1,0 +1,10 @@
+test:
+    override:
+        - node -v
+
+deployment:
+  push_to_server:
+    branch: master
+    commands:
+      - chmod 777 updateApp.sh
+      - ./updateApp.sh
