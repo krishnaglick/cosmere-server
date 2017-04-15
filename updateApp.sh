@@ -4,6 +4,7 @@ cd ~/cosmere-server
 git pull origin-ssh master
 yarn
 npm run prod &
+exit
 #docker ps -a | awk '{ print $1,$2 }' | grep cosmere | awk '{print $1 }' | xargs -I {} docker rm {} -f
 #docker-compose up -d --build
 ENDSSH
