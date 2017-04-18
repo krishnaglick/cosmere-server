@@ -3,11 +3,11 @@ import { browserHistory } from '../routes';
 import cookies from 'cookies-js';
 /* globals $ */
 export async function login(username, password) {
-  const { token, moderator } = await Promise.resolve(
-    $.get(`/user/login?username=${username}&password=${password}`)
-  );
+  const loginResult = $.get(`/api/user/login?username=${username}&password=${password}`);
+  console.log({loginResult});
+  const { token, moderator } = loginResult;
   cookies.set('token', token);
-  browserHistory.push('/songs');
+  browserHistory.push('/search');
   return {
     account: {
       moderator
@@ -16,14 +16,12 @@ export async function login(username, password) {
 }
 
 export async function register(username, password) {
-  const { token, moderator } = await Promise.resolve(
-    $.post(`/user/register`, {
-      username,
-      password
-    })
-  );
+  const { token, moderator } = await $.post(`/api/user/register`, {
+    username,
+    password
+  });
   cookies.set('token', token);
-  browserHistory.push('/songs');
+  browserHistory.push('/search');
   return {
     account: {
       moderator

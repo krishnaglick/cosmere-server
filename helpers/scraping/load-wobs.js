@@ -60,24 +60,22 @@ async function parseHtml(html) {
         }
         return null;
       }
-      /*if(index === conversation.length - 2)
+      if(index === conversation.length - 2)
         return null;
       if(index === conversation.length - 1) {
-        console.log(element.html());
         tags = _.filter(_.map(element.text().trim().split(','), q => q.trim()));
         return null;
       }
-      return element.text().trim();*/
+      return element.text().trim();
     }).toArray());
 
-    /*powerWoBs[id] = {
+    powerWoBs[id] = {
       date,
       tags,
       title,
       conversation: filteredConversation,
       id
-    };*/
-    powerWoBs[id] = $(e).html();
+    };
   });
 
   return powerWoBs;
@@ -92,7 +90,6 @@ async function sleep(time) {
 const filters = ['wot', 'robert', 'jordan', 'wheel of time'];
 
 exports.scrapeWobs = async function(tags) {
-  tags = ['sel'];
   const WoBs = {};
   for(let i = 0; i < tags.length; i++) {
     console.log({ tag: tags[i] });

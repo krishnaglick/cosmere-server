@@ -12,10 +12,18 @@ function SearchResultEdit(props) {
       </div>
       <div className='row'>Date: {date}</div>
       <div className='row'>
-        <textarea id={`search-result-edit-conversation-${i}`} value={conversation.join('\n')} />
+        <textarea
+          style={{resize: 'none', width: '55vw', height: '30vh'}}
+          id={`search-result-edit-conversation-${i}`}
+          value={conversation.join('\n')}
+        />
       </div>
       <div className='row'>
-        <textarea id={`search-result-edit-tags-${i}`} value={tags.join('\n')} />
+        <textarea
+          style={{resize: 'none', width: '55vw', height: '30vh'}}
+          id={`search-result-edit-tags-${i}`}
+          value={tags.join('\n')}
+        />
       </div>
       <div>
           <button type='button' className='btn btn-success' onClick={() => saveEditResult(searchResults, i)}>Save</button>

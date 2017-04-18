@@ -4,6 +4,8 @@ exports.authenticateUser = function(req) {
   const { helpers } = req.server.app;
   try {
     helpers.verifyToken(token);
+    const { username } = helpers.decryptToken(token);
+    req.state.username = username;
     return true;
   }
   catch(x) {
