@@ -3,7 +3,8 @@ import _ from 'lodash';
 
 const actions = [
   require('./account.js'),
-  require('./core.js')
+  require('./core.js'),
+  require('./search.js')
 ];
 
 function bindActions(setState) {
