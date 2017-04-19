@@ -3,8 +3,7 @@ import { browserHistory } from '../routes';
 import cookies from 'cookies-js';
 /* globals $ */
 export async function login(username, password) {
-  const loginResult = $.get(`/api/user/login?username=${username}&password=${password}`);
-  console.log({loginResult});
+  const loginResult = await $.get(`/api/user/login?username=${username}&password=${password}`);
   const { token, moderator } = loginResult;
   cookies.set('token', token);
   browserHistory.push('/search');
