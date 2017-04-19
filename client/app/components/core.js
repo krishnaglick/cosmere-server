@@ -11,7 +11,7 @@ class Core extends Component {
   constructor(...args) {
     super(...args);
     this.state = this.state || {
-      account: { moderator: true }
+      account: { moderator: false }
     };
     this.actions = bindActions(this.setState.bind(this));
   }
