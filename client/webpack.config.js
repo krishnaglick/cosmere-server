@@ -4,6 +4,7 @@ const prebuild = require('pre-build-webpack');
 const path = require('path');
 const fs = require('fs');
 const glob = require('globby');
+const sass = require('node-sass');
 const _ = require('lodash');
 
 module.exports = {
@@ -38,6 +39,17 @@ module.exports = {
     }),
     new webpack.WatchIgnorePlugin([
       path.resolve(__dirname + '/app/actions/index.js')
-    ])
+    ]),
+    new prebuild(() => {
+      try {
+        const { css } = sass.renderSync({
+          file: path.resolve('./client/app/styles/index.scss')
+        });
+        fs.writeFileSync(path.resolve('./static/app.css'), css);
+      }
+      catch(x) {
+        console.warn('Sass error: ', x);
+      }
+    })
   ]
 };

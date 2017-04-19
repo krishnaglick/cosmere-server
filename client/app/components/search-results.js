@@ -10,14 +10,18 @@ function SearchResults({state, actions}) {
   const { searchResults, searching, account: { moderator } } = state;
 
   if(searching)
-    return <div>Loading Results...</div>;
+    return (
+      <div className='form-group' style={{width: '60%', marginLeft: '20%', marginTop: '20px'}}>
+        Loading Results...
+      </div>
+    );
 
   if(!searchResults)
     return null;
 
   if(!searchResults.length) {
     return (
-      <div>
+      <div className='form-group' style={{width: '60%', marginLeft: '20%', marginTop: '20px'}}>
         <span>There are no results!</span>
       </div>
     );

@@ -42,7 +42,7 @@ export function cancelEditResult(searchResults, i) {
 export async function saveEditResult(searchResults, i, { saveWoB }) {
   searchResults[i].editing = false;
   searchResults[i].conversation = document.getElementById(`search-result-edit-conversation-${i}`).value.split('\n');
-  searchResults[i].tags = document.getElementById(`search-result-edit-tags-${i}`).value.split('\n');
+  searchResults[i].tags = document.getElementById(`search-result-edit-tags-${i}`).value.split(', ');
   await saveWoB(searchResults[i]);
   return { searchResults };
 }
