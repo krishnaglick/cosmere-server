@@ -8,7 +8,7 @@ exports.findWob = async function(searchTerm, server) {
   const results = await wob.find({
     tags: new RegExp(searchTerm, 'gi'),
     conversation: new RegExp(searchTerm, 'gi')
-  });
+  }).sort({ date: 1 });
   return _.map(results, (result) => delete result._id && result);
 };
 
