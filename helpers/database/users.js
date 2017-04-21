@@ -13,7 +13,8 @@ exports.login = async function({ username, password }, server) {
   if(await argon2.verify(foundUser.password, password)) {
     return {
       token: await createToken(foundUser),
-      moderator: foundUser.moderator
+      moderator: foundUser.moderator,
+      admin: foundUser.admin
     };
   }
   return boom.badRequest('Incorrect password provided');
@@ -27,7 +28,8 @@ exports.register = async function({ username, password }, server) {
     const createdUser = await user.create({ username, password });
     return {
       token: await createToken(createdUser),
-      moderator: createdUser.moderator
+      moderator: createdUser.moderator,
+      admin: createdUser.admin
     };
   }
   catch(x) {

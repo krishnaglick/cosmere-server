@@ -21,3 +21,10 @@ exports.isModerator = async function(req) {
   const { moderator } = helpers.decryptToken(token);
   return !!moderator;
 };
+
+exports.isAdmin = async function(req) {
+  const { token } = req.headers;
+  const { helpers } = req.server.app;
+  const { admin } = helpers.decryptToken(token);
+  return !!admin;
+};
