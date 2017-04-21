@@ -3,7 +3,7 @@ const _ = require('lodash');
 
 exports.handler = async function(req, rep) {
   const { helpers } = req.server.app;
-  const user = _.merge({}, req.query, req.params, req.payload, req.state);
+  const user = _.merge({}, req.query, req.params, req.payload);
   rep(await helpers.saveUser(user));
 };
 
