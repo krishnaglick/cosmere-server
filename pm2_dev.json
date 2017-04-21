@@ -14,7 +14,8 @@
         "node_modules",
         "client",
         "uploads",
-        "utility"
+        "utility",
+        ".git"
     ],
     "watch_options": {
       "followSymlinks": false

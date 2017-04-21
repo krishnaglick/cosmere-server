@@ -1,27 +1,9 @@
 
 const hapi = require('hapi');
-const fs = require('fs');
 const _ = require('lodash');
 
 const server = new hapi.Server();
 server.connection({ port: require('./config').port });
-
-if(process.env.NODE_ENV === 'prod') {
-  try {
-    const tls = {
-      key: fs.readFileSync('/etc/letsencrypt/live/cosmeretheory.com/privkey.pem'),
-      cert: fs.readFileSync('/etc/letsencrypt/live/cosmeretheory.com/cert.pem')
-    };
-    server.connection({
-      address: 'localhost',
-      port: 443,
-      tls
-    });
-  }
-  catch(x) {
-    console.error('Error getting SSL information!', x);
-  }
-}
 
 (async () => {
   try {

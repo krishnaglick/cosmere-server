@@ -20,7 +20,7 @@ function NavBar({ browserHistory }) {
       </button>
       <Link className='navbar-brand' to='/'>
         <img src='/assets/cosmere-symbol.png' style={{width: '50px', height: '50px'}} />
-        {' Ars Arcanum'}
+        {' Wordbringers'}
       </Link>
 
       <div className='collapse navbar-collapse' id='navbarToggler'>
