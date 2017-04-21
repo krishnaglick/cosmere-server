@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken');
 
 const { secret } = require('../../config');
 
-exports.createToken = async function({ username, moderator }) {
-  return jwt.sign({ username, moderator }, secret, { expiresIn: '8h' });
+exports.createToken = async function({ username, moderator, admin }) {
+  return jwt.sign({ username, moderator, admin }, secret, { expiresIn: '8h' });
 };
 
 exports.verifyToken = function(token) {
@@ -20,8 +20,7 @@ exports.verifyToken = function(token) {
 
 exports.decryptToken = function(token) {
   try {
-    const tokenData = jwt.decode(token);
-    return tokenData;
+    return jwt.decode(token);
   }
   catch(x) {
     console.error(x.toString());

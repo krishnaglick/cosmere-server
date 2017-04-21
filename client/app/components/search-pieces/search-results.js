@@ -2,8 +2,8 @@
 import Inferno from 'inferno';
 import _ from 'lodash';
 
-import SearchResult from './search-pieces/search-result';
-import SearchResultEdit from './search-pieces/search-result-edit';
+import SearchResult from './search-result';
+import SearchResultEdit from './search-result-edit';
 
 function SearchResults({state, actions}) {
 

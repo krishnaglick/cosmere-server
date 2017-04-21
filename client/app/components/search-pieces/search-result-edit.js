@@ -28,6 +28,9 @@ function SearchResultEdit(props) {
           id={`search-result-edit-tags-${i}`}
           value={tags.join(', ')}
         />
+        <small>
+          <a href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>Markdown</a> is used for styling
+        </small>
       </div>
     </div>
   );

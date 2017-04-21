@@ -11,6 +11,9 @@
       "jsx": true
     }
   },
+  "globals": {
+    "$": true
+  },
   "extends": ["eslint:recommended", "plugin:inferno/recommended"],
   "parser": "babel-eslint",
   "rules": {

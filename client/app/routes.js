@@ -7,6 +7,7 @@ const browserHistory = createBrowserHistory();
 
 import Core from './components/core';
 import Search from './components/search';
+import Users from './components/manage/users';
 import Login from './components/login';
 import Register from './components/register';
 
@@ -18,6 +19,7 @@ const routes = (
       <Route path='/register' component={ Register } />
       <Route path='/search' component= { Search } />
       <Route path='/search/:term' component= { Search } />
+      <Route path='/manage/users' component={ Users } />
       <Route path='*' component={ Search } />
     </Route>
   </Router>

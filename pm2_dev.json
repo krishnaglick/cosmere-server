@@ -15,7 +15,10 @@
         "client",
         "uploads",
         "utility",
-        ".git"
+        ".git",
+        "static",
+        "pm2_dev.json",
+        "pm2_prod.json"
     ],
     "watch_options": {
       "followSymlinks": false

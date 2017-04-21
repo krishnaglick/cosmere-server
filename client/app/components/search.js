@@ -2,7 +2,7 @@
 import Inferno from 'inferno';
 import _ from 'lodash';
 
-import SearchResults from './search-results';
+import SearchResults from './search-pieces/search-results';
 
 function Search({ state, actions, params: { term }, browserHistory }) {
   if(term && !state.searching && state.searchTerm !== term)

@@ -1,15 +1,15 @@
 
 import Inferno from 'inferno';
 import cookies from 'cookies-js';
-/*globals $ */
+
 function Login({ actions, browserHistory, state: { searchTerm } }) {
 
   if(cookies.get('token'))
-    browserHistory.push('/songs');
+    browserHistory.push('/search');
   const login = () => actions.login($('#username')[0].value, $('#password')[0].value, searchTerm);
 
   return (
-    <div className='form-group' style={{width: '60%', marginLeft: '20%'}}>
+    <div className='form-group' style={{width: '60%', marginLeft: '20%', marginTop: '20px'}}>
       <div className='form-group row'>
         <label>Username: </label>
         <input type='text' id='username' className='form-control' placeholder='Username' />

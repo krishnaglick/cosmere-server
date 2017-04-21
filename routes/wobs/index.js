@@ -21,4 +21,4 @@ exports.handler = async function(req, rep) {
 
 exports.method = ['POST'];
 
-exports.pres = ['authenticateUser'];
+exports.pres = ['authenticateUser', 'isModerator'];
