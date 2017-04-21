@@ -1,9 +1,11 @@
 
 const hapi = require('hapi');
 const fs = require('fs');
+const _ = require('lodash');
 
 const server = new hapi.Server();
 server.connection({ port: require('./config').port });
+
 if(process.env.NODE_ENV === 'prod') {
   try {
     const tls = {
@@ -11,6 +13,7 @@ if(process.env.NODE_ENV === 'prod') {
       cert: fs.readFileSync('/etc/letsencrypt/live/cosmeretheory.com/cert.pem')
     };
     server.connection({
+      address: 'localhost',
       port: 443,
       tls
     });
@@ -30,7 +33,7 @@ if(process.env.NODE_ENV === 'prod') {
     await new Promise((res, rej) => {
       server.start((err) => {
         if(err) return rej(err);
-        server.log(`Server running at: ${server.info.uri}`);
+        server.log(`Server running at: ${_.map(server.connections, 'info.uri').join(', ')}`);
         res();
       });
     });
