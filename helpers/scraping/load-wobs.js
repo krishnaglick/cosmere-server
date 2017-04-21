@@ -135,11 +135,13 @@ exports.loadWobs = async function({ useSaved }, tags, server) {
   return WoBs;
 };
 
-exports.saveWoBs = async function(WoBs, server) {
+exports.saveWoBs = async function({ useSaved }, WoBs, server) {
   const { wob } = server.db;
   const wobKeys = Object.keys(WoBs);
   await Promise.map(wobKeys, async (key) => {
     try {
+      if(useSaved)
+        await wob.remove();
       return await wob.create(WoBs[key]);
     }
     catch(x) {

@@ -8,7 +8,7 @@ exports.handler = async function(req, rep) {
   (async () => {
     const WoBs = await helpers.loadWobs(params, tags);
     try {
-      await helpers.saveWoBs(WoBs);
+      await helpers.saveWoBs(params, WoBs);
     }
     catch(x) {}
   })();
