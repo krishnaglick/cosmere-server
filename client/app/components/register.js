@@ -2,12 +2,12 @@
 import Inferno from 'inferno';
 import cookies from 'cookies-js';
 /* globals $ */
-function Register({ actions, browserHistory }) {
+function Register({ actions, browserHistory, state: { searchTerm } }) {
 
   if(cookies.get('token'))
     browserHistory.push('/songs');
 
-  const register = () => actions.register($('#username')[0].value, $('#password')[0].value);
+  const register = () => actions.register($('#username')[0].value, $('#password')[0].value, searchTerm);
 
   return (
     <div className='form-group' style={{width: '60%', marginLeft: '20%'}}>

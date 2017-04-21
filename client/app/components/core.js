@@ -11,9 +11,13 @@ class Core extends Component {
   constructor(...args) {
     super(...args);
     this.state = this.state || {
-      account: { moderator: false }
+      account: {
+        moderator: false,
+        admin: false
+      }
     };
     this.actions = bindActions(this.setState.bind(this));
+    this.actions.getAccountInfoFromCookie();
   }
 
   render() {

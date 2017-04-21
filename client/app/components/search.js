@@ -23,7 +23,7 @@ function Search({ state, actions, params: { term }, browserHistory }) {
             className='form-control'
             placeholder='Search for a WoB!'
             value={term}
-            onInput={_.debounce((e) => search(e), 500)}
+            onInput={_.debounce((e) => search(e), 800)}
             onKeyPress={enterSearch}
           />
         </div>

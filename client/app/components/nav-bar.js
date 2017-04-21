@@ -3,13 +3,8 @@ import Inferno from 'inferno';
 import { Link } from 'inferno-router';
 import cookies from 'cookies-js';
 
-function NavBar({ browserHistory }) {
+function NavBar({ browserHistory, actions: { logout } }) {
   const loggedIn = cookies.get('token');
-
-  const logout = () => {
-    cookies.expire('token');
-    browserHistory.push('/');
-  };
 
   const { pathname } = browserHistory.location;
 

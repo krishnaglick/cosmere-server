@@ -18,6 +18,7 @@ const routes = (
       <Route path='/register' component={ Register } />
       <Route path='/search' component= { Search } />
       <Route path='/search/:term' component= { Search } />
+      <Route path='*' component={ Search } />
     </Route>
   </Router>
 );

@@ -2,11 +2,11 @@
 import Inferno from 'inferno';
 import cookies from 'cookies-js';
 /*globals $ */
-function Login({ actions, browserHistory }) {
+function Login({ actions, browserHistory, state: { searchTerm } }) {
 
   if(cookies.get('token'))
     browserHistory.push('/songs');
-  const login = () => actions.login($('#username')[0].value, $('#password')[0].value);
+  const login = () => actions.login($('#username')[0].value, $('#password')[0].value, searchTerm);
 
   return (
     <div className='form-group' style={{width: '60%', marginLeft: '20%'}}>
