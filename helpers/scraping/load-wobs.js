@@ -5,6 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
 const bluebird = require('bluebird');
+const sanitizeHtml = require('sanitize-html');
+const toMarkdown = require('to-markdown');
 const { Promise } = bluebird;
 
 async function promiseScrape(tag) {
@@ -34,6 +36,11 @@ async function promiseScrape(tag) {
 }
 
 async function parseHtml(html) {
+  const allowedAttributes = sanitizeHtml.defaults.allowedAttributes;
+  allowedAttributes.div = ['class'];
+  html = sanitizeHtml(html, {
+    allowedAttributes
+  });
   const $ = cheerio.load(html);
   const wobs = $('.intv-entry-list > ul > li');
   const powerWoBs = {};
@@ -51,7 +58,7 @@ async function parseHtml(html) {
     let tags = '';
     let id = '';
     let title = '';
-    const filteredConversation = _.filter(conversation.map((index, element) => {
+    const filteredConversation = _.flatten(_.filter(conversation.map((index, element) => {
       element = $(element);
       if([0,1].includes(index)) {
         id += element.text().replace(/( |,|:|\n|\t)/g, '');
@@ -66,8 +73,8 @@ async function parseHtml(html) {
         tags = _.filter(_.map(element.text().trim().split(','), q => q.trim()));
         return null;
       }
-      return element.text().trim();
-    }).toArray());
+      return _.filter(toMarkdown(sanitizeHtml(element.html().trim())).replace(/\ufffd/g, '\'').split('\n'));
+    }).toArray()));
 
     powerWoBs[id] = {
       date,
@@ -95,7 +102,7 @@ exports.scrapeWobs = async function(tags) {
     console.log({ tag: tags[i] });
     const [ wobs ] = await Promise.all([
       parseHtml(await promiseScrape(tags[i])),
-      sleep(1000)
+      sleep(2000)
     ]);
     _.merge(WoBs, wobs);
   }
@@ -113,7 +120,7 @@ exports.scrapeWobs = async function(tags) {
   return WoBs;
 };
 
-exports.loadWobs = async function({ useSaved }, server) {
+exports.loadWobs = async function({ useSaved }, tags, server) {
   const { scrapeWobs } = server.app.helpers;
   let WoBs;
   if(useSaved) {
@@ -123,8 +130,7 @@ exports.loadWobs = async function({ useSaved }, server) {
     catch(x) {}
   }
   if(_.isEmpty(WoBs)) {
-    const tags = require('../../utility/tags');
-    WoBs = await scrapeWobs(tags);
+    WoBs = await scrapeWobs(tags || require('../../utility/tags'));
   }
   return WoBs;
 };

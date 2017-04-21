@@ -1,6 +1,10 @@
 
 import Inferno from 'inferno';
-import _ from 'lodash';
+import remarkable from 'remarkable';
+const md = new remarkable({
+  breaks: true,
+  typographer: true
+});
 
 function SearchResult(props) {
   const { i, searchResult, searchResults, moderator, actions } = props;
@@ -19,9 +23,7 @@ function SearchResult(props) {
         <h6 className='card-subtitle mb-2 text-muted'>{date}</h6>
       </div>
       <div className='card-block'>
-        <p className='card-text'>
-          {_.map(conversation, (line) => <div>{line}</div>)}
-        </p>
+        <p className='card-text' dangerouslySetInnerHTML={{ __html: md.render(conversation.join('\n\n')) }}></p>
       </div>
       <div className='card-footer'>
         {tags.join(', ')}

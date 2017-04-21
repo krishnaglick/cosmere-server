@@ -1,11 +1,12 @@
 
 const _ = require('lodash');
+const tags = require('../../utility/tags');
 
 exports.handler = async function(req, rep) {
   const { helpers } = req.server.app;
   const params = _.merge({}, req.query, req.params, req.payload);
   (async () => {
-    const WoBs = await helpers.loadWobs(params);
+    const WoBs = await helpers.loadWobs(params, tags);
     try {
       await helpers.saveWoBs(WoBs);
     }
