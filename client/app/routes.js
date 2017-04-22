@@ -10,6 +10,7 @@ import Search from './components/search';
 import Users from './components/manage/users';
 import Login from './components/login';
 import Register from './components/register';
+import Add from './components/wobs/add';
 
 const routes = (
   <Router history={ browserHistory }>
@@ -20,6 +21,7 @@ const routes = (
       <Route path='/search' component= { Search } />
       <Route path='/search/:term' component= { Search } />
       <Route path='/manage/users' component={ Users } />
+      <Route path='/wobs/add' component={ Add } />
       <Route path='*' component={ Search } />
     </Route>
   </Router>

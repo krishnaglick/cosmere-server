@@ -39,10 +39,10 @@ export function cancelEditResult(searchResults, i) {
   return { searchResults };
 }
 
-export async function saveEditResult(searchResults, i, { saveWoB }) {
+export async function saveEditResult(searchResults, i, { updateWoB }) {
   searchResults[i].editing = false;
   searchResults[i].conversation = document.getElementById(`search-result-edit-conversation-${i}`).value.split('\n');
   searchResults[i].tags = document.getElementById(`search-result-edit-tags-${i}`).value.split(', ');
-  await saveWoB(searchResults[i]);
+  await updateWoB(searchResults[i]);
   return { searchResults };
 }

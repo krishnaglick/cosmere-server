@@ -5,7 +5,8 @@ const actions = [
   require('./account.js'),
   require('./core.js'),
   require('./manageUsers.js'),
-  require('./search.js')
+  require('./search.js'),
+  require('./wobs.js')
 ];
 
 function bindActions(setState) {

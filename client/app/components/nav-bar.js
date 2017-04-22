@@ -3,7 +3,7 @@ import Inferno from 'inferno';
 import { Link } from 'inferno-router';
 import cookies from 'cookies-js';
 
-function NavBar({ browserHistory, actions: { logout }, state: { account: { admin } } }) {
+function NavBar({ browserHistory, actions: { logout }, state: { account: { admin, moderator } } }) {
   const loggedIn = cookies.get('token');
 
   const { pathname } = browserHistory.location;
@@ -26,6 +26,11 @@ function NavBar({ browserHistory, actions: { logout }, state: { account: { admin
           <li className={`nav-item ${pathname.includes('search') && 'active'}`}>
             <Link className='nav-link' to='/search'>Search</Link>
           </li>
+          { loggedIn && moderator &&
+            <li className={`nav-item ${pathname.includes('wobs/add') && 'active'}`}>
+              <Link className='nav-link' to='/wobs/add'>Add Word</Link>
+            </li>
+          }
           { loggedIn && admin &&
             <li className={`nav-item ${pathname.includes('manage/users') && 'active'}`}>
               <Link className='nav-link' to='/manage/users'>Manage Users</Link>
