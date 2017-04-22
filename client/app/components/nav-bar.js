@@ -27,7 +27,7 @@ function NavBar({ browserHistory, actions: { logout }, state: { account: { admin
             <Link className='nav-link' to='/search'>Search</Link>
           </li>
           { loggedIn && admin &&
-            <li className='nav-item'>
+            <li className={`nav-item ${pathname.includes('manage/users') && 'active'}`}>
               <Link className='nav-link' to='/manage/users'>Manage Users</Link>
             </li>
           }
